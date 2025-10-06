@@ -1,17 +1,18 @@
 <<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+=======
+## Bài Tập Lớn Giữa Kỳ Môn Thiết Kế Web Nâng Cao
+>>>>>>> a380514a82c99272e8a2eb8520d37429652875d2
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Phần Mềm Quản Lý Và Thưởng Thức Nhạc
 
-## About Laravel
+## Giới thiệu
+Phần mềm Quản Lý Nhạc là một ứng dụng web giúp quản lý danh sách bài hát một cách hiệu quả, bao gồm các chức năng như thêm, xóa, cập nhật và phát nhạc. Dự án hỗ trợ hiển thị danh sách bài hát, phát nhạc với giao diện chuyên nghiệp giống SoundCloud, và cho phép điều chỉnh volume. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Thành viên:
+- Họ tên sinh viên: Phạm Đức Tài - Mã SV: 23010379
 
+<<<<<<< HEAD
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
 - Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
@@ -61,6 +62,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 =======
-# WebMusic
-project
->>>>>>> 8259daa66081ca2f00d376d115910a04114869ef
+## Chức năng chính
+- Thêm bài hát mới
+- Cập nhật thông tin bài hát (tiêu đề, nghệ sĩ, thể loại)
+- Xóa bài hát
+- Phát nhạc với giao diện chuyên nghiệp
+- Hiển thị danh sách bài hát
+## UML
+>>>>>>> a380514a82c99272e8a2eb8520d37429652875d2

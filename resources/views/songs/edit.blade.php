@@ -59,9 +59,13 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
-                            Cập Nhật Bài Hát
-                        </button>
+                        <button type="submit"
+    class="w-full bg-gradient-to-r from-green-300 to-green-500 
+           hover:from-green-400 hover:to-green-600 
+           text-black font-bold py-3 rounded-lg shadow-lg 
+           transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-once">
+    Cập Nhật Bài Hát
+</button>
                     </div>
                 </form>
             </div>
