@@ -1,16 +1,30 @@
 <x-app-layout>
     <div class="min-h-screen bg-gradient-to-br from-cyan-500 via-purple-600 to-pink-500 bg-cover bg-center relative overflow-hidden">
+        <!-- Hiệu ứng nền -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
             <div class="absolute w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
         </div>
+
         <div class="max-w-3xl mx-auto py-16 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="bg-white bg-opacity-90 rounded-3xl shadow-2xl p-10 animate-slide-up backdrop-blur-xl border border-white/20">
+
+                <!-- Nút quay lại trang chủ -->
+                <div class="mb-6">
+                    <a href="{{ route('songs.index') }}" 
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-700 bg-gradient-to-r from-gray-200 to-gray-100 hover:from-gray-300 hover:to-gray-200 transition duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        Trở về Trang Chủ
+                    </a>
+                </div>
+
                 <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-500 mb-8 text-center animate-glow">
                     Thêm Bài Hát Mới
                 </h2>
+
                 <form id="song-form" method="POST" action="{{ route('songs.store') }}" enctype="multipart/form-data" class="space-y-8" onsubmit="return validateForm(event)">
                     @csrf
+
                     <!-- Tiêu đề -->
                     <div class="relative">
                         <label for="title" class="block text-sm font-semibold text-gray-800">Tiêu Đề</label>
@@ -64,16 +78,16 @@
                     <!-- Nút Thêm Bài Hát -->
                     <div class="flex justify-center">
                         <button type="submit"
-    class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-black font-bold py-4 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl animate-pulse">
-    Thêm Bài Hát
-</button>
-
+                            class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-black font-bold py-4 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl animate-pulse">
+                            <i class="fas fa-plus mr-2"></i> Thêm Bài Hát
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Script xác thực -->
     <script>
         function validateForm(event) {
             const title = document.getElementById('title').value.trim();
@@ -90,6 +104,7 @@
         }
     </script>
 
+    <!-- CSS hiệu ứng -->
     <style>
         @keyframes slide-up {
             from { transform: translateY(50px); opacity: 0; }

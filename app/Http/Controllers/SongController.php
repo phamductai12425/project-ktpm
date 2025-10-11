@@ -42,6 +42,7 @@ class SongController extends Controller
             'name' => $request->artist_name,
             'user_id' => Auth::id(),
         ]);
+
         // Lưu hoặc lấy thể loại
         $genre = \App\Models\Genre::firstOrCreate([
             'name' => $request->genre_name,
@@ -82,17 +83,30 @@ class SongController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'artist_id' => 'required|exists:artists,id',
-            'genre_id' => 'required|exists:genres,id',
+            'artist_name' => 'required|string|max:255',
+            'genre_name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Tìm hoặc tạo nghệ sĩ mới theo tên
+        $artist = \App\Models\Artist::firstOrCreate([
+            'name' => $request->artist_name,
+            'user_id' => Auth::id(),
+        ]);
+
+        // Tìm hoặc tạo thể loại mới theo tên
+        $genre = \App\Models\Genre::firstOrCreate([
+            'name' => $request->genre_name,
+            'user_id' => Auth::id(),
         ]);
 
         $data = [
             'title' => $request->title,
-            'artist_id' => $request->artist_id,
-            'genre_id' => $request->genre_id,
+            'artist_id' => $artist->id,
+            'genre_id' => $genre->id,
         ];
 
+        // Cập nhật ảnh nếu có
         if ($request->hasFile('image')) {
             if ($song->image_path) {
                 \Storage::disk('public')->delete($song->image_path);
@@ -102,7 +116,7 @@ class SongController extends Controller
 
         $song->update($data);
 
-        return redirect()->route('songs.index')->with('success', 'Bài hát đã được cập nhật thành công.');
+        return redirect()->route('songs.index')->with('success', 'Bài hát đã được cập nhật thành công!');
     }
 
     public function destroy(Song $song)
