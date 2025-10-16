@@ -5,9 +5,8 @@
             <!-- Nút quay lại -->
             <div class="mb-6">
                 <a href="{{ route('songs.index') }}" 
-                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-200 bg-white/20 hover:bg-white/30 transition duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
-                    <i class="fas fa-arrow-left text-gray-100"></i>
-                    Trở về Trang Chủ
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-100 bg-gradient-to-r from-pink-500/40 to-purple-500/40 hover:from-pink-500/60 hover:to-purple-600/60 transition duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
+                    <i class="fas fa-arrow-left"></i> Trở về Trang Chủ
                 </a>
             </div>
 
@@ -25,7 +24,8 @@
                 <div>
                     <label for="title" class="block text-sm font-semibold text-pink-200 mb-1">Tiêu đề</label>
                     <input id="title" name="title" type="text" value="{{ old('title', $song->title) }}" 
-                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-pink-400 focus:border-transparent" 
+                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 
+                                  focus:ring-2 focus:ring-pink-400 focus:border-transparent px-3 py-2" 
                            placeholder="Nhập tên bài hát..." required>
                     @error('title')
                         <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
@@ -38,7 +38,8 @@
                     <input id="artist_name" name="artist_name" type="text" 
                            value="{{ old('artist_name', $song->artist->name ?? '') }}"
                            placeholder="Nhập hoặc thay đổi tên nghệ sĩ..."
-                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-pink-400 focus:border-transparent" required>
+                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 
+                                  focus:ring-2 focus:ring-pink-400 focus:border-transparent px-3 py-2" required>
                     @error('artist_name')
                         <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -50,7 +51,8 @@
                     <input id="genre_name" name="genre_name" type="text" 
                            value="{{ old('genre_name', $song->genre->name ?? '') }}"
                            placeholder="Nhập hoặc thay đổi thể loại..."
-                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-pink-400 focus:border-transparent" required>
+                           class="block w-full rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 
+                                  focus:ring-2 focus:ring-pink-400 focus:border-transparent px-3 py-2" required>
                     @error('genre_name')
                         <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -58,7 +60,7 @@
 
                 <!-- Ảnh -->
                 <div>
-                    <label for="image" class="block text-sm font-semibold text-pink-200 mb-2">Ảnh bài hát (Tùy chọn)</label>
+                    <label for="image" class="block text-sm font-semibold text-pink-200 mb-2">Ảnh bài hát (tùy chọn)</label>
                     @if ($song->image_path)
                         <img src="{{ asset('storage/' . $song->image_path) }}" alt="{{ $song->title }}" 
                              class="mb-3 w-32 h-32 object-cover rounded-lg shadow-lg border border-white/20">

@@ -2,72 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Playlist;
 use App\Models\Song;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
     public function index()
     {
-        $playlists = Playlist::where('user_id', auth()->id())->with('songs')->get();
+        $playlists = Playlist::where('user_id', Auth::id())->withCount('songs')->get();
         return view('playlists.index', compact('playlists'));
     }
 
     public function create()
     {
-        $songs = Song::where('user_id', auth()->id())->get();
-        return view('playlists.create', compact('songs'));
+        return view('playlists.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'song_ids' => 'required|array',
-        ]);
-
-        $playlist = Playlist::create([
-            'name' => $request->name,
-            'user_id' => auth()->id(),
-        ]);
-
-        $playlist->songs()->attach($request->song_ids);
-
-        return redirect()->route('playlists.index')->with('success', 'Playlist created successfully!');
-    }
-
-    public function show(Playlist $playlist)
-    {
-        if ($playlist->user_id !== auth()->id()) abort(403);
-        return view('playlists.show', compact('playlist'));
+        $request->validate(['name'=>'required|string|max:255']);
+        $pl = Playlist::create(['name'=>$request->name,'user_id'=>Auth::id()]);
+        return redirect()->route('playlists.index')->with('success','Playlist created.');
     }
 
     public function edit(Playlist $playlist)
     {
-        if ($playlist->user_id !== auth()->id()) abort(403);
-        $songs = Song::where('user_id', auth()->id())->get();
-        return view('playlists.edit', compact('playlist', 'songs'));
+        $this->authorize('update', $playlist);
+        return view('playlists.edit', compact('playlist'));
     }
 
     public function update(Request $request, Playlist $playlist)
     {
-        if ($playlist->user_id !== auth()->id()) abort(403);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'song_ids' => 'required|array',
-        ]);
-
-        $playlist->update(['name' => $request->name]);
-        $playlist->songs()->sync($request->song_ids);
-
-        return redirect()->route('playlists.index')->with('success', 'Playlist updated successfully!');
+        $this->authorize('update', $playlist);
+        $request->validate(['name'=>'required|string|max:255']);
+        $playlist->update(['name'=>$request->name]);
+        return redirect()->route('playlists.index')->with('success','Updated.');
     }
 
     public function destroy(Playlist $playlist)
     {
-        if ($playlist->user_id !== auth()->id()) abort(403);
+        $this->authorize('delete', $playlist);
         $playlist->delete();
-        return redirect()->route('playlists.index')->with('success', 'Playlist deleted successfully!');
+        return redirect()->route('playlists.index')->with('success','Deleted.');
+    }
+
+    public function addSong(Request $request, Playlist $playlist)
+    {
+        $this->authorize('update', $playlist);
+        $request->validate(['song_id'=>'required|exists:songs,id']);
+        $playlist->songs()->attach($request->song_id);
+        return back()->with('success','Added to playlist.');
+    }
+
+    public function removeSong(Playlist $playlist, Song $song)
+    {
+        $this->authorize('update', $playlist);
+        $playlist->songs()->detach($song->id);
+        return back()->with('success','Removed.');
     }
 }
